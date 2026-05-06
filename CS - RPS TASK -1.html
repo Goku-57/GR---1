@@ -1,0 +1,145 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:var(--font-sans)}
+.g2{background:#1e1b4b;border-radius:20px;padding:28px;min-height:520px}
+.g2top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.g2title-wrap .g2title{font-size:20px;font-weight:500;color:#e0e7ff}
+.g2title-wrap .g2sub{font-size:11px;color:#6366f1;margin-top:2px;letter-spacing:1px}
+.g2reset{background:rgba(239,68,68,0.15);border:1.5px solid rgba(239,68,68,0.3);color:#f87171;padding:7px 14px;border-radius:8px;font-size:12px;cursor:pointer;transition:all 0.2s;font-family:var(--font-sans)}
+.g2reset:hover{background:rgba(239,68,68,0.3)}
+.g2scores{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
+.g2scard{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:14px;text-align:center}
+.g2snum{font-size:26px;font-weight:500}
+.g2slabel{font-size:11px;color:#818cf8;margin-top:2px}
+.s-you{color:#a5b4fc}
+.s-tie{color:#fcd34d}
+.s-cpu{color:#f87171}
+.g2arena{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;margin-bottom:20px;display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:8px;min-height:120px}
+.g2aside{text-align:center}
+.g2alabel{font-size:11px;color:#818cf8;margin-bottom:10px;letter-spacing:0.5px}
+.g2acard{width:72px;height:72px;border-radius:16px;border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto;transition:all 0.3s}
+.g2acard.win{border-color:#22c55e;background:rgba(34,197,94,0.15)}
+.g2acard.lose{border-color:#ef4444;background:rgba(239,68,68,0.12)}
+.g2acard.tie{border-color:#f59e0b;background:rgba(245,158,11,0.12)}
+.g2aname{font-size:12px;color:#818cf8;margin-top:8px;font-weight:500}
+.g2vs{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:11px;color:#818cf8;font-weight:500;margin:0 auto}
+.g2result{text-align:center;margin-bottom:20px;min-height:42px}
+.g2rbadge{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:24px;font-size:15px;font-weight:500}
+.g2rwin{background:rgba(34,197,94,0.15);color:#4ade80;border:1.5px solid rgba(34,197,94,0.35)}
+.g2rlose{background:rgba(239,68,68,0.12);color:#f87171;border:1.5px solid rgba(239,68,68,0.3)}
+.g2rtie{background:rgba(245,158,11,0.12);color:#fcd34d;border:1.5px solid rgba(245,158,11,0.3)}
+.g2ridle{color:#818cf8;font-size:13px;margin-top:4px}
+.g2dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.g2choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.g2cbtn{background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.1);border-radius:16px;padding:16px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all 0.2s;font-family:var(--font-sans)}
+.g2cbtn:hover{border-color:#6366f1;background:rgba(99,102,241,0.18);transform:translateY(-2px)}
+.g2cbtn:active{transform:scale(0.96)}
+.g2cicon{font-size:30px;line-height:1}
+.g2cname{font-size:12px;color:#c7d2fe;font-weight:500}
+.g2cbeats{font-size:10px;color:#4f46e5}
+.g2hist-label{font-size:11px;color:#6366f1;margin-bottom:8px;letter-spacing:0.5px}
+.g2hist{display:flex;gap:6px;flex-wrap:wrap}
+.g2hchip{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:500}
+.g2hchip.w{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.g2hchip.l{background:rgba(239,68,68,0.12);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.g2hchip.t{background:rgba(245,158,11,0.12);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.g2none{font-size:12px;color:#4f46e5}
+</style>
+<div class="g2">
+  <div class="g2top">
+    <div class="g2title-wrap">
+      <div class="g2title">Rock Paper Scissors</div>
+      <div class="g2sub">CHALLENGE THE CPU</div>
+    </div>
+    <button class="g2reset" onclick="g2reset()">Reset</button>
+  </div>
+  <div class="g2scores">
+    <div class="g2scard"><div class="g2snum s-you" id="g2sYou">0</div><div class="g2slabel">Your Wins</div></div>
+    <div class="g2scard"><div class="g2snum s-tie" id="g2sTie">0</div><div class="g2slabel">Ties</div></div>
+    <div class="g2scard"><div class="g2snum s-cpu" id="g2sCpu">0</div><div class="g2slabel">CPU Wins</div></div>
+  </div>
+  <div class="g2arena">
+    <div class="g2aside">
+      <div class="g2alabel">YOU</div>
+      <div class="g2acard" id="g2aYou"><span style="font-size:22px;color:#4f46e5">?</span></div>
+      <div class="g2aname" id="g2aYouName">—</div>
+    </div>
+    <div class="g2vs">VS</div>
+    <div class="g2aside">
+      <div class="g2alabel">CPU</div>
+      <div class="g2acard" id="g2aCpu"><span style="font-size:22px;color:#4f46e5">?</span></div>
+      <div class="g2aname" id="g2aCpuName">—</div>
+    </div>
+  </div>
+  <div class="g2result"><div id="g2rtext" class="g2ridle">Pick a move to start playing</div></div>
+  <div class="g2choices">
+    <button class="g2cbtn" onclick="g2play('rock')">
+      <span class="g2cicon">&#9994;</span>
+      <span class="g2cname">Rock</span>
+      <span class="g2cbeats">beats scissors</span>
+    </button>
+    <button class="g2cbtn" onclick="g2play('paper')">
+      <span class="g2cicon">&#9995;</span>
+      <span class="g2cname">Paper</span>
+      <span class="g2cbeats">beats rock</span>
+    </button>
+    <button class="g2cbtn" onclick="g2play('scissors')">
+      <span class="g2cicon">&#9996;</span>
+      <span class="g2cname">Scissors</span>
+      <span class="g2cbeats">beats paper</span>
+    </button>
+  </div>
+  <div class="g2hist-label">MATCH HISTORY</div>
+  <div class="g2hist" id="g2hist"><span class="g2none">No rounds played yet</span></div>
+</div>
+<script>
+const g2icons={rock:'&#9994;',paper:'&#9995;',scissors:'&#9996;'};
+const g2choices=['rock','paper','scissors'];
+const g2names={rock:'Rock',paper:'Paper',scissors:'Scissors'};
+let g2s={you:0,cpu:0,tie:0},g2h=[];
+function g2play(u){
+  const c=g2choices[Math.floor(Math.random()*3)];
+  const aY=document.getElementById('g2aYou'),aC=document.getElementById('g2aCpu');
+  const aYN=document.getElementById('g2aYouName'),aCN=document.getElementById('g2aCpuName');
+  aY.innerHTML=`<span style="font-size:32px">${g2icons[u]}</span>`;
+  aC.innerHTML=`<span style="font-size:32px">${g2icons[c]}</span>`;
+  aYN.textContent=g2names[u];aCN.textContent=g2names[c];
+  aY.className='g2acard';aC.className='g2acard';
+  const rt=document.getElementById('g2rtext');
+  let hcls;
+  if(u===c){
+    rt.innerHTML='<span class="g2rbadge g2rtie"><span class="g2dot" style="background:#f59e0b"></span>It\'s a Tie!</span>';
+    aY.className='g2acard tie';aC.className='g2acard tie';
+    g2s.tie++;hcls='t';
+  }else if((u==='rock'&&c==='scissors')||(u==='scissors'&&c==='paper')||(u==='paper'&&c==='rock')){
+    rt.innerHTML='<span class="g2rbadge g2rwin"><span class="g2dot" style="background:#22c55e"></span>You Win this round!</span>';
+    aY.className='g2acard win';aC.className='g2acard lose';
+    g2s.you++;hcls='w';
+  }else{
+    rt.innerHTML='<span class="g2rbadge g2rlose"><span class="g2dot" style="background:#ef4444"></span>CPU Wins this round!</span>';
+    aY.className='g2acard lose';aC.className='g2acard win';
+    g2s.cpu++;hcls='l';
+  }
+  document.getElementById('g2sYou').textContent=g2s.you;
+  document.getElementById('g2sCpu').textContent=g2s.cpu;
+  document.getElementById('g2sTie').textContent=g2s.tie;
+  const rmap={rock:'R',paper:'P',scissors:'S'},lmap={w:'Win',l:'Loss',t:'Tie'};
+  g2h.unshift({u,c,r:hcls});if(g2h.length>8)g2h.pop();
+  document.getElementById('g2hist').innerHTML=g2h.map(x=>`<span class="g2hchip ${x.r}">${rmap[x.u]} vs ${rmap[x.c]}: ${lmap[x.r]}</span>`).join('');
+}
+function g2reset(){
+  g2s={you:0,cpu:0,tie:0};g2h=[];
+  document.getElementById('g2sYou').textContent='0';
+  document.getElementById('g2sCpu').textContent='0';
+  document.getElementById('g2sTie').textContent='0';
+  document.getElementById('g2aYou').className='g2acard';
+  document.getElementById('g2aYou').innerHTML='<span style="font-size:22px;color:#4f46e5">?</span>';
+  document.getElementById('g2aCpu').className='g2acard';
+  document.getElementById('g2aCpu').innerHTML='<span style="font-size:22px;color:#4f46e5">?</span>';
+  document.getElementById('g2aYouName').textContent='—';
+  document.getElementById('g2aCpuName').textContent='—';
+  document.getElementById('g2rtext').textContent='Pick a move to start playing';
+  document.getElementById('g2rtext').className='g2ridle';
+  document.getElementById('g2hist').innerHTML='<span class="g2none">No rounds played yet</span>';
+}
+</script>

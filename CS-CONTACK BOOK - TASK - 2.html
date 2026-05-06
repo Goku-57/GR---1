@@ -1,0 +1,197 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.fapp{min-height:600px;background:#f0f4ff;border-radius:16px;font-family:var(--font-sans)}
+.fsidebar{background:#4f46e5;width:100%;border-radius:16px 16px 0 0;padding:20px 24px;display:flex;align-items:center;justify-content:space-between}
+.flogo{display:flex;align-items:center;gap:10px}
+.flogo-icon{width:38px;height:38px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:500}
+.flogo-name{color:#fff;font-size:18px;font-weight:500}
+.flogo-tagline{color:rgba(255,255,255,0.65);font-size:11px}
+.fadd-btn{background:#fff;color:#4f46e5;border:none;padding:9px 18px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.fadd-btn:hover{background:#eef2ff;transform:scale(0.97)}
+.fmain{padding:20px 24px}
+.fsearch{display:flex;align-items:center;gap:12px;background:#fff;border-radius:12px;padding:10px 16px;margin-bottom:16px;border:1.5px solid #e0e7ff;transition:border-color 0.2s}
+.fsearch:focus-within{border-color:#4f46e5}
+.fsearch-icon{color:#6366f1;font-size:16px}
+.fsearch input{border:none;outline:none;flex:1;font-size:14px;color:#1e1b4b;background:transparent}
+.fsearch input::placeholder{color:#a5b4fc}
+.ftabs{display:flex;gap:6px;margin-bottom:16px}
+.ftab{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid #c7d2fe;color:#4f46e5;background:#fff;transition:all 0.2s}
+.ftab.active{background:#4f46e5;color:#fff;border-color:#4f46e5}
+.flist{display:flex;flex-direction:column;gap:8px}
+.fcontact{background:#fff;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1.5px solid #e0e7ff;cursor:pointer;transition:all 0.2s}
+.fcontact:hover{border-color:#a5b4fc;box-shadow:0 4px 12px rgba(79,70,229,0.08);transform:translateX(4px)}
+.favatar{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;flex-shrink:0}
+.finfo{flex:1;min-width:0}
+.fname{font-size:14px;font-weight:500;color:#1e1b4b;margin-bottom:2px}
+.fphone{font-size:12px;color:#6366f1;margin-bottom:1px}
+.femail{font-size:11px;color:#94a3b8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fbadge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500;background:#ede9fe;color:#5b21b6;margin-left:auto;flex-shrink:0}
+.factions{display:flex;flex-direction:column;gap:4px;margin-left:8px}
+.fedit-btn,.fdel-btn{border:none;border-radius:8px;padding:5px 10px;font-size:11px;cursor:pointer;font-weight:500;transition:all 0.2s;font-family:var(--font-sans)}
+.fedit-btn{background:#ede9fe;color:#5b21b6}
+.fedit-btn:hover{background:#ddd6fe}
+.fdel-btn{background:#fef2f2;color:#dc2626}
+.fdel-btn:hover{background:#fee2e2}
+.fempty{text-align:center;padding:40px;color:#94a3b8;font-size:14px}
+.fstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.fstat{background:#fff;border:1.5px solid #e0e7ff;border-radius:12px;padding:12px;text-align:center}
+.fstat-n{font-size:20px;font-weight:500;color:#4f46e5}
+.fstat-l{font-size:11px;color:#6b7280;margin-top:2px}
+.fmodal-bg{display:none;position:fixed;inset:0;background:rgba(79,70,229,0.25);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.fmodal-bg.open{display:flex}
+.fmodal{background:#fff;border-radius:20px;padding:28px;width:380px;max-width:95vw;border:2px solid #e0e7ff}
+.fmodal h3{font-size:17px;font-weight:500;color:#1e1b4b;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.fmodal h3 .micon{width:32px;height:32px;background:#ede9fe;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#5b21b6;font-size:14px}
+.ffield{margin-bottom:14px}
+.ffield label{display:block;font-size:11px;color:#6366f1;margin-bottom:6px;font-weight:500;letter-spacing:0.5px}
+.ffield input,.ffield textarea{width:100%;background:#f8faff;border:1.5px solid #e0e7ff;color:#1e1b4b;padding:10px 14px;border-radius:10px;font-size:13px;outline:none;transition:border-color 0.2s;font-family:var(--font-sans)}
+.ffield input:focus,.ffield textarea:focus{border-color:#4f46e5;background:#fff}
+.ffield textarea{resize:none;height:70px}
+.fmodal-btns{display:flex;gap:10px;margin-top:20px}
+.fsave-btn{flex:1;background:#4f46e5;color:#fff;border:none;padding:11px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.fsave-btn:hover{background:#4338ca}
+.fcancel-btn{flex:1;background:#f8faff;color:#4f46e5;border:1.5px solid #e0e7ff;padding:11px;border-radius:10px;font-size:13px;cursor:pointer;transition:all 0.2s;font-family:var(--font-sans)}
+.fcancel-btn:hover{background:#ede9fe}
+.ftoast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#4f46e5;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;z-index:200;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap}
+.ftoast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+<div class="fapp">
+  <div class="fsidebar">
+    <div class="flogo">
+      <div class="flogo-icon">P</div>
+      <div>
+        <div class="flogo-name">PeopleBook</div>
+        <div class="flogo-tagline">Smart contact manager</div>
+      </div>
+    </div>
+    <button class="fadd-btn" onclick="fopenModal()">+ New</button>
+  </div>
+  <div class="fmain">
+    <div class="fsearch">
+      <span class="fsearch-icon">&#128269;</span>
+      <input type="text" id="fsearchInput" placeholder="Search contacts..." oninput="frenderContacts()">
+    </div>
+    <div class="fstats">
+      <div class="fstat"><div class="fstat-n" id="ftotal">0</div><div class="fstat-l">Contacts</div></div>
+      <div class="fstat"><div class="fstat-n" id="ffound">0</div><div class="fstat-l">Shown</div></div>
+      <div class="fstat"><div class="fstat-n" id="fwithmail">0</div><div class="fstat-l">With Email</div></div>
+    </div>
+    <div class="ftabs">
+      <div class="ftab active" onclick="fsetTab(this,'all')">All</div>
+      <div class="ftab" onclick="fsetTab(this,'alpha')">A-Z</div>
+      <div class="ftab" onclick="fsetTab(this,'recent')">Recent</div>
+    </div>
+    <div class="flist" id="flist"></div>
+    <div id="fempty" class="fempty" style="display:none">No contacts found!</div>
+  </div>
+</div>
+<div class="fmodal-bg" id="fmodalBg">
+  <div class="fmodal">
+    <h3><div class="micon">&#9998;</div><span id="fmodalTitle">Add Contact</span></h3>
+    <div class="ffield"><label>FULL NAME</label><input type="text" id="ffName" placeholder="Enter name"></div>
+    <div class="ffield"><label>PHONE</label><input type="text" id="ffPhone" placeholder="+91 XXXXX XXXXX"></div>
+    <div class="ffield"><label>EMAIL</label><input type="text" id="ffEmail" placeholder="email@example.com"></div>
+    <div class="ffield"><label>ADDRESS</label><textarea id="ffAddress" placeholder="Street, City..."></textarea></div>
+    <div class="fmodal-btns">
+      <button class="fcancel-btn" onclick="fcloseModal()">Cancel</button>
+      <button class="fsave-btn" onclick="fsaveContact()">Save</button>
+    </div>
+  </div>
+</div>
+<div class="ftoast" id="ftoast"></div>
+<script>
+const favcolors=[
+  {bg:'#ede9fe',text:'#5b21b6'},
+  {bg:'#dbeafe',text:'#1e40af'},
+  {bg:'#dcfce7',text:'#15803d'},
+  {bg:'#fef3c7',text:'#92400e'},
+  {bg:'#fce7f3',text:'#9d174d'},
+  {bg:'#e0f2fe',text:'#0369a1'},
+];
+let fcontacts=[
+  {id:1,name:'Kavitha R',phone:'+91 98123 45678',email:'kavitha@gmail.com',address:'Madurai, TN',color:0,ts:Date.now()-3},
+  {id:2,name:'Senthil M',phone:'+91 87234 56789',email:'senthil@gmail.com',address:'Trichy, TN',color:1,ts:Date.now()-2},
+  {id:3,name:'Divya P',phone:'+91 76345 67890',email:'',address:'Salem, TN',color:2,ts:Date.now()-1},
+];
+let feditId=null,ftabMode='all';
+
+function finitials(n){return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
+
+function frenderContacts(){
+  const q=document.getElementById('fsearchInput').value.toLowerCase();
+  let filtered=fcontacts.filter(c=>c.name.toLowerCase().includes(q)||c.phone.includes(q));
+  if(ftabMode==='alpha')filtered=[...filtered].sort((a,b)=>a.name.localeCompare(b.name));
+  else if(ftabMode==='recent')filtered=[...filtered].sort((a,b)=>b.ts-a.ts).slice(0,5);
+  const list=document.getElementById('flist');
+  const empty=document.getElementById('fempty');
+  document.getElementById('ftotal').textContent=fcontacts.length;
+  document.getElementById('ffound').textContent=filtered.length;
+  document.getElementById('fwithmail').textContent=fcontacts.filter(c=>c.email).length;
+  if(filtered.length===0){list.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  list.innerHTML=filtered.map(c=>`
+    <div class="fcontact">
+      <div class="favatar" style="background:${favcolors[c.color%favcolors.length].bg};color:${favcolors[c.color%favcolors.length].text}">${finitials(c.name)}</div>
+      <div class="finfo">
+        <div class="fname">${c.name}</div>
+        <div class="fphone">${c.phone}</div>
+        <div class="femail">${c.email||'No email'}</div>
+      </div>
+      ${c.email?'<span class="fbadge">Email</span>':''}
+      <div class="factions">
+        <button class="fedit-btn" onclick="fopenEdit(${c.id});event.stopPropagation()">Edit</button>
+        <button class="fdel-btn" onclick="fdeleteContact(${c.id});event.stopPropagation()">Del</button>
+      </div>
+    </div>`).join('');
+}
+
+function fsetTab(el,mode){
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');ftabMode=mode;frenderContacts();
+}
+
+function fopenModal(reset=true){
+  if(reset){feditId=null;document.getElementById('fmodalTitle').textContent='Add Contact';['ffName','ffPhone','ffEmail','ffAddress'].forEach(f=>document.getElementById(f).value='');}
+  document.getElementById('fmodalBg').classList.add('open');
+}
+function fcloseModal(){document.getElementById('fmodalBg').classList.remove('open');}
+
+function fopenEdit(id){
+  const c=fcontacts.find(x=>x.id===id);if(!c)return;
+  feditId=id;document.getElementById('fmodalTitle').textContent='Edit Contact';
+  document.getElementById('ffName').value=c.name;
+  document.getElementById('ffPhone').value=c.phone;
+  document.getElementById('ffEmail').value=c.email;
+  document.getElementById('ffAddress').value=c.address;
+  fopenModal(false);
+}
+
+function fsaveContact(){
+  const name=document.getElementById('ffName').value.trim();
+  const phone=document.getElementById('ffPhone').value.trim();
+  const email=document.getElementById('ffEmail').value.trim();
+  const address=document.getElementById('ffAddress').value.trim();
+  if(!name||!phone){fshowToast('Name & phone required!');return;}
+  if(feditId){
+    const c=fcontacts.find(x=>x.id===feditId);
+    if(c)Object.assign(c,{name,phone,email,address,ts:Date.now()});
+    fshowToast('Updated successfully!');
+  }else{
+    fcontacts.push({id:Date.now(),name,phone,email,address,color:fcontacts.length,ts:Date.now()});
+    fshowToast('Contact added!');
+  }
+  fcloseModal();frenderContacts();
+}
+
+function fdeleteContact(id){fcontacts=fcontacts.filter(x=>x.id!==id);frenderContacts();fshowToast('Deleted!');}
+
+function fshowToast(msg){
+  const t=document.getElementById('ftoast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+document.getElementById('fmodalBg').addEventListener('click',e=>{if(e.target===e.currentTarget)fcloseModal();});
+frenderContacts();
+</script>
